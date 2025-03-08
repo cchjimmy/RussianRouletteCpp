@@ -107,6 +107,7 @@ export async function step(
   nextPlayer(game);
   if (winner < 0) return -1;
   console.log(`Player ${winner} wins`);
+  if (betIdx == -1) return 0;
   console.log(
     winner == betIdx
       ? "Congradulations on winning the bet!"
