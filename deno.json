@@ -1,5 +1,0 @@
-{
-	"tasks": {
-		"build": "deno compile -o build/rr src/main.ts"
-	}
-}
