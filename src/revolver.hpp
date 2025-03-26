@@ -4,7 +4,7 @@
 typedef struct {
   int shots;
   int capacity;
-} revolver;
+} revolverT;
 
 int randomizeShots(int numberOfBullets, int capacity) {
   numberOfBullets = numberOfBullets < capacity ? numberOfBullets : capacity;
@@ -21,18 +21,18 @@ int randomizeShots(int numberOfBullets, int capacity) {
   return shots;
 }
 
-revolver newRevolver(int numberOfBullets = 1, int capacity = 6) {
+revolverT newRevolver(int numberOfBullets = 1, int capacity = 6) {
   return {
       randomizeShots(numberOfBullets, capacity),
       capacity,
   };
 }
 
-void reload(revolver &revolver, int numberOfBullets = 1) {
+void reload(revolverT &revolver, int numberOfBullets = 1) {
   revolver.shots = randomizeShots(numberOfBullets, revolver.capacity);
 }
 
-void load(revolver &revolver, int numberOfBullets) {
+void load(revolverT &revolver, int numberOfBullets) {
   int position = revolver.capacity;
   while (numberOfBullets) {
     numberOfBullets--;
@@ -43,14 +43,14 @@ void load(revolver &revolver, int numberOfBullets) {
   }
 }
 
-int check(revolver &revolver) {
+int check(revolverT &revolver) {
   // 1 means live
   return revolver.shots & 1;
 }
 
-void shoot(revolver &revolver) { revolver.shots >>= 1; }
+void shoot(revolverT &revolver) { revolver.shots >>= 1; }
 
-int spin(revolver &revolver) {
+int spin(revolverT &revolver) {
   int spins = rand() % revolver.capacity;
   while (spins > 0) {
     revolver.shots += (revolver.shots & 1) << revolver.capacity;
@@ -60,7 +60,7 @@ int spin(revolver &revolver) {
   return spins;
 }
 
-int liveLeft(revolver &revolver) {
+int isEmpty(revolverT &revolver) {
   int count = revolver.capacity;
   int liveCount = 0;
   while (count) {
